@@ -1,0 +1,41 @@
+{% extends 'desk/base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Details</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'views.chart' %}">Charts</a></li>
+            <li class="breadcrumb-item active">Details</li>
+        </ol>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Customer in Cluster Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in data %}
+                                <tr>
+                                    <td>{{item.customer.code}}</td>
+                                    <td>{{item.customer.name}}</td>
+                                    <td>{{item.customer.phone}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

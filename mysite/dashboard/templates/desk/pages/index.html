@@ -1,0 +1,269 @@
+{% extends 'desk/base.html' %}
+
+{% block script %}
+<script src="/static/js/charts.index.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-line mr-1"></i>
+                    Cluster Center Previous Month
+                </div>
+                <div class="card-body">
+                    <canvas id="myLineChartPre" width="100%" height="30"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-line mr-1"></i>
+                    Cluster Center Last Month
+                </div>
+                <div class="card-body">
+                    <canvas id="myLineChartNow" width="100%" height="30"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Percent Money by Category Previous Month
+                </div>
+                <div class="card-body">
+                    <canvas id="myPieChartPre" width="100%" height="30"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Percent Money by Category Last Month
+                </div>
+                <div class="card-body">
+                    <canvas id="myPieChartNow" width="100%" height="30"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Total Money by Category Two Months
+        </div>
+        <div class="card-body">
+            <canvas id="myBarChart" width="100%" height="30"></canvas>
+        </div>
+    </div>
+
+    <div class="d-none">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Last Month Cluster Center Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tableClusterNow" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Cluster</th>
+                                <th>Drink</th>
+                                <th>Rice</th>
+                                <th>Spice</th>
+                                <th>Conv</th>
+                                <th>Fruit</th>
+                                <th>Other</th>
+                                <th>Nonfood</th>
+                                <th>Vegetable</th>
+                                <th>Meat</th>
+                                <th>Fish</th>
+                                <th>Tea</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in clusterNow %}
+                            <tr>
+                                <td><a href="{% url 'views.detail' id=item.id %}">Cluster {{item.id}}</a></td>
+                                <td>{{item.drink}}</td>
+                                <td>{{item.rice}}</td>
+                                <td>{{item.spice}}</td>
+                                <td>{{item.conv}}</td>
+                                <td>{{item.fruit}}</td>
+                                <td>{{item.other}}</td>
+                                <td>{{item.nonfood}}</td>
+                                <td>{{item.veget}}</td>
+                                <td>{{item.meat}}</td>
+                                <td>{{item.fish}}</td>
+                                <td>{{item.tea}}</td>
+                                <td>{{item.count}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Previous Month Cluster Center Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tableClusterPre" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Cluster</th>
+                                <th>Drink</th>
+                                <th>Rice</th>
+                                <th>Spice</th>
+                                <th>Conv</th>
+                                <th>Fruit</th>
+                                <th>Other</th>
+                                <th>Nonfood</th>
+                                <th>Vegetable</th>
+                                <th>Meat</th>
+                                <th>Fish</th>
+                                <th>Tea</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in clusterPre %}
+                            <tr>
+                                <td><a href="{% url 'views.detail' id=item.id %}">Cluster {{item.id}}</a></td>
+                                <td>{{item.drink}}</td>
+                                <td>{{item.rice}}</td>
+                                <td>{{item.spice}}</td>
+                                <td>{{item.conv}}</td>
+                                <td>{{item.fruit}}</td>
+                                <td>{{item.other}}</td>
+                                <td>{{item.nonfood}}</td>
+                                <td>{{item.veget}}</td>
+                                <td>{{item.meat}}</td>
+                                <td>{{item.fish}}</td>
+                                <td>{{item.tea}}</td>
+                                <td>{{item.count}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Total Money Category by Month
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tableTotalMoney" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Label</th>
+                                <th>Drink</th>
+                                <th>Rice</th>
+                                <th>Spice</th>
+                                <th>Conv</th>
+                                <th>Fruit</th>
+                                <th>Other</th>
+                                <th>Nonfood</th>
+                                <th>Vegetable</th>
+                                <th>Meat</th>
+                                <th>Fish</th>
+                                <th>Tea</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in totalMoney %}
+                            <tr>
+                                <td>{{item.label}}</td>
+                                <td>{{item.drink}}</td>
+                                <td>{{item.rice}}</td>
+                                <td>{{item.spice}}</td>
+                                <td>{{item.conv}}</td>
+                                <td>{{item.fruit}}</td>
+                                <td>{{item.other}}</td>
+                                <td>{{item.nonfood}}</td>
+                                <td>{{item.veget}}</td>
+                                <td>{{item.meat}}</td>
+                                <td>{{item.fish}}</td>
+                                <td>{{item.tea}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Total Money Category by Month
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tablePercent" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Label</th>
+                                <th>Drink</th>
+                                <th>Rice</th>
+                                <th>Spice</th>
+                                <th>Conv</th>
+                                <th>Fruit</th>
+                                <th>Other</th>
+                                <th>Nonfood</th>
+                                <th>Vegetable</th>
+                                <th>Meat</th>
+                                <th>Fish</th>
+                                <th>Tea</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in percent %}
+                            <tr>
+                                <td>{{item.label}}</td>
+                                <td>{{item.drink}}</td>
+                                <td>{{item.rice}}</td>
+                                <td>{{item.spice}}</td>
+                                <td>{{item.conv}}</td>
+                                <td>{{item.fruit}}</td>
+                                <td>{{item.other}}</td>
+                                <td>{{item.nonfood}}</td>
+                                <td>{{item.veget}}</td>
+                                <td>{{item.meat}}</td>
+                                <td>{{item.fish}}</td>
+                                <td>{{item.tea}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

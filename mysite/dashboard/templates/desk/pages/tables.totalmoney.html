@@ -1,0 +1,76 @@
+{% extends 'desk/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-4">Total Money</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Total Money</li>
+    </ol>
+    
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-calendar-alt mr-1"></i>Select Date</div>
+        <div class="card-body">
+            <form action="{% url 'tables.totalmoney' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" value="{{date}}" name="dateValue">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit" name="pickDate">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Total Money Table</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Drink</th>
+                            <th>Rice</th>
+                            <th>Spice</th>
+                            <th>Conv</th>
+                            <th>Fruit</th>
+                            <th>Other</th>
+                            <th>Nonfood</th>
+                            <th>Vegetable</th>
+                            <th>Meat</th>
+                            <th>Fish</th>
+                            <th>Tea</th>
+                            <th>Count</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <td>{{item.customer.name}}</td>
+                                <td>{{item.drink}}</td>
+                                <td>{{item.rice}}</td>
+                                <td>{{item.spice}}</td>
+                                <td>{{item.conv}}</td>
+                                <td>{{item.fruit}}</td>
+                                <td>{{item.other}}</td>
+                                <td>{{item.nonfood}}</td>
+                                <td>{{item.veget}}</td>
+                                <td>{{item.meat}}</td>
+                                <td>{{item.fish}}</td>
+                                <td>{{item.tea}}</td>
+                                <td>{{item.count}}</td>
+                                <td>{{item.date}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

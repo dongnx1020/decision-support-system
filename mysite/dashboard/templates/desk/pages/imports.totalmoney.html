@@ -1,0 +1,38 @@
+{% extends 'desk/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-4">Imports Total Money</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Imports Total Money</li>
+    </ol>
+    {% if message %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-upload mr-1"></i>Imports Total Money</div>
+        <div class="card-body">
+            <form action="{% url 'imports.totalmoney' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="custom-file" id="tableTotalMoney">
+                            <input type="file" class="custom-file-input" name="fileTotalMoney" id="totalMoney">
+                            <label class="custom-file-label" for="totalMoney">{{totalMoneyPath}}</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit" name="importTotalMoney">Import</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
